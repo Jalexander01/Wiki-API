@@ -7,7 +7,9 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({
+
+app.use(express.json());
+app.use(express.urlencoded({
   extended: true
 }));
 
