@@ -14,7 +14,8 @@ app.use(express.urlencoded({
 }));
 
 app.use(express.static("public"));
-mongoose.connect("mongodb://localhost:27017/wikiDB", {useNewUrlParser: true});
+
+mongoose.connect("mongodb://localhost:27017/wikiDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 const articleSchema = {
   title: String,
@@ -23,7 +24,14 @@ const articleSchema = {
 
 const Article = mongoose.model("Article", articleSchema);
 
+app.get("/articles", function (req, res) {
+  Article.find(function (err, foundArticles) {
+    console.log(foundArticles);
 
-app.listen(3000, function() {
-    console.log("Server started on port 3000");
-  });
+  })
+})
+
+
+app.listen(3000, function () {
+  console.log("Server started on port 3000");
+});
