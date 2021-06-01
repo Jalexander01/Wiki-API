@@ -93,7 +93,24 @@ app.route("/articles/:articleTitle")
       }
 
     })
+  })
+
+  .put(function (req, res) {
+    Article.update(
+      { title: req.params.articleTitle },
+      { title: req.body.title, content: req.body.content },
+      { overwrite: true },
+      function (err) {
+        if (!err) {
+          res.send("sucess");
+        } else {
+          res.send(err);
+        }
+      }
+    );
   });
+
+
 
 
 
