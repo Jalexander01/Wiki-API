@@ -24,12 +24,14 @@ const articleSchema = {
 
 const Article = mongoose.model("Article", articleSchema);
 
+
+// #1 How server responds to Get requests (Getting information from our database) 
 app.get("/articles", function (req, res) {
   Article.find(function (err, foundArticles) {
+    if (!err) { }
     res.send(foundArticles);
-
-  })
-})
+  });
+});
 
 
 app.listen(3000, function () {
