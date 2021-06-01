@@ -25,13 +25,57 @@ const articleSchema = {
 const Article = mongoose.model("Article", articleSchema);
 
 
-// #1 How server responds when client sends Get requests (Getting information from our database) 
-app.get("/articles", function (req, res) {
-  Article.find(function (err, foundArticles) {
-    if (!err) { }
-    res.send(foundArticles);
+
+
+
+
+
+app.route("/articles")
+  // #1 How server responds when client sends Get requests (Getting information from our database) 
+  // app.get("/articles",);
+  .get(function (req, res) {
+    Article.find(function (err, foundArticles) {
+      if (!err) { }
+      res.send(foundArticles);
+    });
+  })
+
+  .post(function (req, res) {
+
+    // #2 How server responds when client sends Post requests (Getting information from our database) 
+    // app.post("/articles",);
+
+    const newArticle = new Article({
+      title: req.body.title,
+      content: req.body.content
+    });
+    newArticle.save(function (err) {
+      if (!err) {
+        res.send("success");
+
+      }
+      else {
+        res.send(err);
+      }
+    });
+  })
+
+
+  // #3 How server responds when client sends Delete requests  
+  // app.delete("/articles",);
+
+
+  .delete(function (req, res) {
+    Article.deleteMany(function (err) {
+      if (!err) {
+        res.send("Success");
+      } else {
+        res.send(err);
+      }
+    });
+
   });
-});
+
 
 
 app.listen(3000, function () {
