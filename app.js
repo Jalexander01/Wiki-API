@@ -29,7 +29,7 @@ const Article = mongoose.model("Article", articleSchema);
 
 
 
-
+//////////////////////requesting all articles/////////////////////
 app.route("/articles")
   // #1 How server responds when client sends Get requests (Getting information from our database) 
   // app.get("/articles",);
@@ -76,7 +76,13 @@ app.route("/articles")
 
   });
 
+//////////////////////requesting specific article/////////////////////
 
+
+app.route("/articles/:articleTitle")
+  .get(function (req, res) {
+
+  });
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
